@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>18 anni di Mariagiovanna 🎉</title>
+
+  <!-- Google Fonts: caratteri eleganti -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Foglio di stile esterno -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       SCHERMATA BUSTA (overlay iniziale)
+       Viene mostrata al caricamento della pagina.
+       Al click dell'utente, si anima e scompare.
+  ════════════════════════════════════════════ -->
+  <div id="envelope-screen">
+
+    <div class="env-wrap" id="envelope" onclick="openEnvelope()">
+
+      <!-- Ombra separata sotto la busta (non sfoca la SVG) -->
+      <div class="env-shadow"></div>
+
+      <!-- Busta disegnata in SVG -->
+      <svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">
+        <!-- Corpo della busta -->
+        <rect x="0" y="40" width="380" height="200" rx="10" fill="#fff8f2"/>
+
+        <!-- Triangoli interni (profondità laterale) -->
+        <polygon points="0,60 190,155 0,240"   fill="#edd0dc"/>
+        <polygon points="380,60 190,155 380,240" fill="#e8c8d5"/>
+
+        <!-- Fondo busta -->
+        <polygon points="0,240 190,155 380,240" fill="#e0b8c8"/>
+
+        <!-- Sigillo ceralacca — gruppo separato per animazione hover -->
+        <g class="seal-group">
+          <!-- Alone morbido -->
+          <circle cx="190" cy="158" r="28" fill="#c8748a" opacity=".18"/>
+          <!-- Disco principale -->
+          <circle cx="190" cy="158" r="21" fill="#c8748a"/>
+          <!-- Anello interno decorativo -->
+          <circle cx="190" cy="158" r="16" fill="none" stroke="#fff" stroke-width="0.8" opacity=".5"/>
+          <!-- Iniziali -->
+          <text x="190" y="164" text-anchor="middle" fill="#fff"
+                font-family="Georgia,serif" font-size="16" font-style="italic"
+                letter-spacing="1">MG</text>
+        </g>
+
+        <!-- Lembo superiore — si apre con CSS -->
+        <g class="flap-group">
+          <!-- Rettangolo di base del lembo -->
+          <rect x="0" y="40" width="380" height="20" rx="10" fill="#f8e0ea"/>
+          <!-- Triangolo visibile del lembo -->
+          <polygon points="0,60 190,148 380,60 380,40 0,40" fill="#f5d8e5"/>
+          <!-- Bordo inferiore del lembo (ombra sottile) -->
+          <polygon points="0,60 190,148 380,60" fill="#ecc8d8" opacity=".7"/>
+          <!-- Decorazione centrale sul lembo -->
+          <circle cx="190" cy="48" r="14" fill="#c8748a" opacity=".2"/>
+          <text x="190" y="53" text-anchor="middle" fill="#c8748a"
+                font-family="Georgia,serif" font-size="13" font-style="italic" opacity=".65">18</text>
+        </g>
+      </svg>
+
+      <!-- Bigliettino che emerge dalla busta -->
+      <div class="card-inner">
+        <p class="card-eyebrow">Invito speciale</p>
+        <p>Sei invitata/o<br>alla festa di<br><em><strong>Mariagiovanna</strong></em></p>
+      </div>
+
+    </div>
+
+    <!-- Tap hint fuori dall'env-wrap così non viene traslato con la busta al hover -->
+    <div class="tap-hint">Tocca per aprire</div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       CONTENITORE PETALI ANIMATI
+       I petali vengono creati dinamicamente da JS
+       e inseriti qui sopra tutto il contenuto.
+  ════════════════════════════════════════════ -->
+  <div id="petals-container"></div>
+
+
+  <!-- ══════════════════════════════════════════
+       SITO PRINCIPALE
+       Nascosto inizialmente (opacity: 0).
+       Diventa visibile dopo l'animazione busta.
+  ════════════════════════════════════════════ -->
+  <div id="main-site">
+
+    <!-- ── HERO ─────────────────────────────── -->
+    <!-- Prima sezione: nome + numero "18" gigante -->
+    <section class="hero">
+      <!-- Cerchi decorativi di sfondo -->
+      <div class="ring" style="width:300px;height:300px;top:-80px;right:-80px;opacity:.4;"></div>
+      <div class="ring" style="width:180px;height:180px;bottom:60px;left:-50px;opacity:.3;"></div>
+
+      <p class="hero-eyebrow">Sei cordialmente invitata/o</p>
+
+      <h1 class="hero-title">
+        18
+        <span class="hero-name">Mariagiovanna</span>
+      </h1>
+
+      <p class="hero-sub">Una serata indimenticabile</p>
+
+      <div class="divider"></div>
+
+      <p class="hero-quote">
+        "Diciotto anni non si compiono ogni giorno —<br>
+        festeggiamoli come meritano."
+      </p>
+
+      <!-- Indicatore di scroll -->
+      <div class="scroll-hint">
+        <span></span>
+        SCORRI
+      </div>
+    </section>
+
+
+    <!-- ── DETTAGLI EVENTO ────────────────────── -->
+    <!-- Sezione con data, orario, luogo, programma -->
+    <section class="reveal">
+      <p class="section-label">Dettagli</p>
+      <h2 class="section-title">Quando & Dove</h2>
+      <p class="section-body">Ti aspettiamo per celebrare insieme questo giorno speciale. Ecco tutto quello che devi sapere.</p>
+
+      <div class="info-card">
+
+        <div class="info-row">
+          <div class="info-icon">📅</div>
+          <div class="info-content">
+            <label>Data</label>
+            <strong>Giovedì, 13 Agosto 2026</strong>
+            <small>A partire dalle ore 20:00</small>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon">🕗</div>
+          <div class="info-content">
+            <label>Orario</label>
+            <strong>20:00 — Fine notte</strong>
+            <small>Aperitivo di benvenuto dalle 20:00</small>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <label>Luogo</label>
+            <strong>Lido Salsello</strong>
+            <small>Bisceglie (BT)</small>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon">🍽️</div>
+          <div class="info-content">
+            <label>Programma</label>
+            <strong>Cena + Dopocena</strong>
+            <small>Buffet, torta, musica e balli</small>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ── CONTO ALLA ROVESCIA ─────────────────── -->
+    <!-- I numeri vengono aggiornati ogni secondo da JS -->
+    <section class="reveal">
+      <p class="section-label">Conto alla rovescia</p>
+      <h2 class="section-title">Mancano...</h2>
+      <div class="countdown-grid">
+        <div class="cd-box">
+          <span class="cd-num" id="cd-days">--</span>
+          <span class="cd-label">Giorni</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cd-hours">--</span>
+          <span class="cd-label">Ore</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cd-mins">--</span>
+          <span class="cd-label">Minuti</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cd-secs">--</span>
+          <span class="cd-label">Secondi</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── MAPPA E COME ARRIVARE ──────────────── -->
+    <section class="reveal">
+      <p class="section-label">Come arrivare</p>
+      <h2 class="section-title">Il luogo</h2>
+      <p class="section-body">
+        Ci troviamo al <strong>Lido Salsello</strong>, direttamente sul mare di Bisceglie.
+        Facilmente raggiungibile in auto, con parcheggio disponibile nelle vicinanze.
+      </p>
+
+      <!-- Mappa illustrativa SVG (decorativa) -->
+      <div class="map-preview">
+        <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="600" height="200" fill="#fce8f0"/>
+          <!-- Strade orizzontali e verticali -->
+          <rect x="0"   y="90"  width="600" height="20" fill="#e8c0ce"/>
+          <rect x="280" y="0"   width="20"  height="200" fill="#e8c0ce"/>
+          <rect x="100" y="0"   width="12"  height="200" fill="#f0d4dc"/>
+          <rect x="450" y="0"   width="12"  height="200" fill="#f0d4dc"/>
+          <rect x="0"   y="30"  width="600" height="12" fill="#f0d4dc"/>
+          <rect x="0"   y="158" width="600" height="12" fill="#f0d4dc"/>
+          <!-- Isolati/edifici -->
+          <rect x="120" y="42"  width="150" height="40" rx="4" fill="#f5dde5" opacity=".8"/>
+          <rect x="300" y="42"  width="140" height="40" rx="4" fill="#f5dde5" opacity=".8"/>
+          <rect x="120" y="120" width="150" height="30" rx="4" fill="#f5dde5" opacity=".8"/>
+          <rect x="300" y="120" width="140" height="30" rx="4" fill="#f5dde5" opacity=".8"/>
+          <!-- Pin posizione -->
+          <circle cx="290" cy="100" r="20" fill="#c8748a"/>
+          <circle cx="290" cy="100" r="8"  fill="#fff"/>
+          <line x1="290" y1="118" x2="290" y2="135" stroke="#c8748a" stroke-width="3"/>
+          <!-- Etichetta nome -->
+          <rect x="210" y="140" width="160" height="26" rx="6" fill="#fff" opacity=".9"/>
+          <text x="290" y="157" text-anchor="middle"
+                font-family="Georgia,serif" font-size="12" font-style="italic" fill="#8b3e54">
+            Lido Salsello — Bisceglie
+          </text>
+        </svg>
+      </div>
+
+      <!-- Bottone che apre Google Maps -->
+      <a href="https://maps.google.com/?q=Lido+Salsello+Bisceglie" target="_blank" class="map-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+        Apri in Maps
+      </a>
+    </section>
+
+
+    <!-- ── DRESS CODE ─────────────────────────── -->
+    <section class="reveal">
+      <p class="section-label">Dress code</p>
+      <h2 class="section-title">Come vestirsi</h2>
+      <p class="section-body">
+        Vogliamo una serata elegante e romantica! Vi chiediamo di venire vestiti
+        in tono con la palette della serata.
+        <strong>Niente nero, per favore</strong> — lasciamo spazio ai colori!
+      </p>
+      <!-- Palette cromatica visiva -->
+      <div class="color-palette">
+        <div class="color-chip" style="background:#c8748a;" data-name="Rosa"></div>
+        <div class="color-chip" style="background:#e8c0ce;" data-name="Cipria"></div>
+        <div class="color-chip" style="background:#c9a84c;" data-name="Oro"></div>
+        <div class="color-chip" style="background:#d4b896;" data-name="Champagne"></div>
+        <div class="color-chip" style="background:#8b3e54;" data-name="Borgogna"></div>
+        <div class="color-chip" style="background:#f9e4ec;" data-name="Bianco Rosa"></div>
+      </div>
+    </section>
+
+
+    <!-- ── FORM CONFERMA PRESENZA ─────────────── -->
+    <div class="confirm-section">
+      <div class="confirm-inner">
+
+        <!-- Form visibile inizialmente -->
+        <div id="form-wrap">
+          <p class="section-label">Partecipazione</p>
+          <h2 class="section-title">Ci sarai?</h2>
+          <p class="section-body" style="margin-bottom:8px;">
+            Conferma la tua presenza entro il
+            <strong style="color:var(--gold)">1 Agosto 2026</strong>.<br>
+            Non vediamo l'ora di festeggiare insieme!
+          </p>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Nome</label>
+              <input type="text" id="f-nome" class="form-input" placeholder="Il tuo nome" autocomplete="given-name">
+              <!-- Messaggio di errore inline per il campo nome -->
+              <span class="field-error" id="f-nome-error"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Cognome</label>
+              <input type="text" id="f-cognome" class="form-input" placeholder="Il tuo cognome" autocomplete="family-name">
+              <!-- Messaggio di errore inline per il campo cognome -->
+              <span class="field-error" id="f-cognome-error"></span>
+            </div>
+          </div>
+
+          <!-- Errore globale (es. duplicato) — appare sopra il bottone -->
+          <div class="form-error-global" id="form-error-global"></div>
+
+          <div class="form-note">
+            <label class="form-label">Un messaggio per Mariagiovanna (opzionale)</label>
+            <textarea id="f-msg" class="form-textarea" placeholder="Scrivi un pensiero, un augurio..."></textarea>
+          </div>
+
+          <!-- Bottone submit: chiama submitForm() in JS -->
+          <button class="submit-btn" onclick="submitForm()">✦ Confermo la mia presenza ✦</button>
+        </div>
+
+        <!-- Messaggio di successo (nascosto, appare dopo submit) -->
+        <div class="success-msg" id="success-msg">
+          <div class="success-icon">🌹</div>
+          <h3 id="success-name">Grazie!</h3>
+          <p>
+            La tua presenza è confermata.<br>
+            Non vediamo l'ora di festeggiare insieme.<br><br>
+            <em style="color:var(--gold)">Ci vediamo il 13 Agosto!</em>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ── FOOTER ─────────────────────────────── -->
+    <footer>
+      <p>Con amore, per <span>Mariagiovanna</span> ✦ 18 anni</p>
+      <p style="margin-top:8px;font-size:10px;opacity:.5;">
+        Per informazioni: contattaci su WhatsApp
+      </p>
+    </footer>
+
+  </div><!-- /#main-site -->
+
+
+  <!-- Script JavaScript esterno (caricato alla fine per performance) -->
+  <script src="script.js"></script>
+
+</body>
+</html>
